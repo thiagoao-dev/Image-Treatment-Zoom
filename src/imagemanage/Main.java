@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         Imagem img = new Imagem();
-        img.setPath("img/image.jpg").setVector(3, 3);
+        img.setPath("image.jpg").writeImage("saida.jpg", 250, 250);
     }
     
 }

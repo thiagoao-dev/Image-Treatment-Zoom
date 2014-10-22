@@ -16,9 +16,7 @@ import javax.imageio.ImageIO;
  */
 public class Imagem {
 
-    private int x;
-    private int y;
-    private String path;
+    private String imagemName;
     private final String format;
     private BufferedImage inputImage;
     private BufferedImage outputImage;
@@ -29,15 +27,14 @@ public class Imagem {
         this.format = "jpg";
     }
     
-    public Imagem setPath(String path)
+    public Imagem setPath(String name)
     {
-        // Guarda o caminho do arquivo
-        this.path = path;
+        // Guarda o nome do arquivo
+        this.imagemName = name;
         
         try {
-            
             // Faz a leitura da imagem
-            this.inputImage = ImageIO.read(new File(this.path));
+            this.inputImage = ImageIO.read(new File("src/img/"+this.imagemName));
             
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -46,12 +43,8 @@ public class Imagem {
         return this;
     }
     
-    public Imagem setVector(int y, int x)
-    {
-        // Armazena o tamanho da sub-matriz
-        this.y = y;
-        this.x = x;
-        
+    public Imagem writeImage(String name)
+    {        
         try {
             
             this.outputImage = new BufferedImage( 
@@ -59,30 +52,67 @@ public class Imagem {
                 this.inputImage.getHeight(), 
                 BufferedImage.TYPE_INT_RGB);
 
-            for (int x2 = 0; x2 < this.inputImage.getWidth(); x2++) {
-                for (int y2 = 0; y2 < this.inputImage.getHeight(); y2++) {
+            for (int x = 0; x < this.inputImage.getWidth(); x++) {
+                
+                for (int y = 0; y < this.inputImage.getHeight(); y++) {
+                    
                     // Recupera o número representativo do binário para o pixel indicado
-                    int rgb = this.inputImage.getRGB(x2, y2);
+                    int rgb = this.inputImage.getRGB(x, y);
                     
                     // Separa as cores binárias em uma escala de um inteiro de 255
                     int blue = 0x0000ff & rgb;
                     int green = 0x0000ff & (rgb >> 8);
                     int red = 0x0000ff & (rgb >> 16);
                     
-                    // Cria uma cor
+                    // Cria uma escala de cor
                     int lum = (int) (red * 0.299 + green * 0.587 + blue * 0.114);
-                    this.outputImage.setRGB(x2, y2, lum | (lum << 8) | (lum << 16));
+                    
+                    // Grava os pixels na imagem de saida
+                    this.outputImage.setRGB(x, y, blue | (green << 8) | (red << 16));
                 }
             }
             
-            ImageIO.write(this.outputImage, "jpg", new File("saida.jpg"));
+            // Grava a imagem no disco
+            ImageIO.write(this.outputImage, "jpg", new File(name));
         
         } catch (IOException e) {
-        
+            System.out.println(e.getMessage());
         }
         
         return this;
     }
     
+    public Imagem writeImage(String name, int width, int height){
+        
+        try {
+            
+            this.outputImage = new BufferedImage( 
+                width, 
+                height, 
+                BufferedImage.TYPE_INT_RGB);
+
+            for (int x = 0; x < width; x++) {
+                
+                for (int y = 0; y < height; y++) {
+                    
+                    // Recupera o número representativo do binário para o pixel indicado
+                    int rgb = this.inputImage.getRGB(x, y);
+                    
+                    // Separa as cores binárias em uma escala de um inteiro de 255
+                    int blue = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red = 0x0000ff & (rgb >> 16);
+                    
+                    this.outputImage.setRGB(x, y, blue | (green << 8) | (red << 16));
+                }
+            }
+            
+            ImageIO.write(this.outputImage, "jpg", new File(name));
+        
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return this;
+    }
     
 }
