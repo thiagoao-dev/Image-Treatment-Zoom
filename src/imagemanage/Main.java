@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         Imagem img = new Imagem();
-        img.setPath("image.jpg").writeImage("saida.jpg", 250, 250);
+        img.loadImage("image.jpg").grayImage("gray.jpg").grainImage("grain.jpg", 10000, 9900);
     }
     
 }
