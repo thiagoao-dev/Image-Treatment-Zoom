@@ -138,6 +138,7 @@ public class Imagem {
                     
                     // Recupera o número representativo do binário para o pixel indicado
                     int rgb = this.inputImage.getRGB(x, y);
+                    
                     // Separa as cores binárias em uma escala de um inteiro de 255
                     int blue  = 0x0000ff & rgb;
                     int green = 0x0000ff & (rgb >> 8);
@@ -148,6 +149,48 @@ public class Imagem {
                    
                     // Grava os pixels na imagem de saida
                     this.outputImage.setRGB(x, y, lum | (lum << 8) | (lum << 16));
+                }
+            }
+            
+            // Grava a imagem no disco
+            ImageIO.write(this.outputImage, "jpg", new File(name));
+        
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return this;
+    }
+    
+    public Imagem binarizacao(String name, int alpha)
+    {        
+        try {
+            
+            this.outputImage = new BufferedImage( 
+                this.inputImage.getWidth(), 
+                this.inputImage.getHeight(), 
+                BufferedImage.TYPE_INT_RGB);
+                Random gerador = new Random();
+                    
+            for (int x = 0; x < this.inputImage.getWidth(); x++) {
+                
+                for (int y = 0; y < this.inputImage.getHeight(); y++) {
+                    
+                    // Recupera o número representativo do binário para o pixel indicado
+                    int rgb = this.inputImage.getRGB(x, y);
+                    
+                    // Separa as cores binárias em uma escala de um inteiro de 255
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    if((blue+green+red)/3 > alpha){
+                        // Grava os pixels na imagem de saida
+                        this.outputImage.setRGB(x, y, 255 | (255 << 8) | (255 << 16));
+                    } else {
+                        // Grava os pixels na imagem de saida
+                        this.outputImage.setRGB(x, y, 0 | (0 << 8) | (0 << 16));
+                    }
                 }
             }
             
@@ -192,7 +235,81 @@ public class Imagem {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        
         return this;
+    }
+    
+    public Imagem zoomInDigital(String name, int size){
+        
+        try {
+            
+            this.outputImage = new BufferedImage( 
+                this.inputImage.getWidth() * size, 
+                this.inputImage.getHeight() * size, 
+                BufferedImage.TYPE_INT_RGB);
+                Random gerador = new Random();
+                    
+            for (int x = 0; x < this.outputImage.getWidth(); x+=(size/2)) {
+                
+                for (int y = 0; y < this.outputImage.getHeight(); y+=(size/2)) {
+                    
+                    // Recupera o número representativo do binário para o pixel indicado
+                    int rgb = this.inputImage.getRGB(x/size, y/size);
+                    // Separa as cores binárias em uma escala de um inteiro de 255
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    // Grava os pixels na imagem de saida
+                    this.outputImage.setRGB(x, y, blue | (green << 8) | (red << 16));
+                    this.outputImage.setRGB(x+1, y, blue | (green << 8) | (red << 16));
+                    this.outputImage.setRGB(x, y+1, blue | (green << 8) | (red << 16));
+                    this.outputImage.setRGB(x+1, y+1, blue | (green << 8) | (red << 16));
+                }
+            }
+            
+            // Grava a imagem no disco
+            ImageIO.write(this.outputImage, "jpg", new File(name));
+        
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return this;        
+    }
+    
+    public Imagem zoomInLinear(String name, int size){
+        
+        try {
+            
+            this.outputImage = new BufferedImage( 
+                this.inputImage.getWidth(), 
+                this.inputImage.getHeight(), 
+                BufferedImage.TYPE_INT_RGB);
+                Random gerador = new Random();
+                    
+            for (int x = 0; x < this.outputImage.getWidth(); x++) {
+                
+                for (int y = 0; y < this.outputImage.getHeight(); y++) {
+                    
+                    // Recupera o número representativo do binário para o pixel indicado
+                    int rgb = this.inputImage.getRGB(x, y);
+                    // Separa as cores binárias em uma escala de um inteiro de 255
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    this.outputImage.setRGB(x, y, blue | (green << 8) | (red << 16));
+                }
+            }
+            
+            // Grava a imagem no disco
+            ImageIO.write(this.outputImage, "jpg", new File(name));
+        
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return this;        
     }
     
 }
