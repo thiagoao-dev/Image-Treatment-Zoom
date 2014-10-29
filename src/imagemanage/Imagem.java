@@ -239,7 +239,7 @@ public class Imagem {
         return this;
     }
     
-    public Imagem zoomInDigital(String name, int size){
+    public Imagem zoomInQuadrado(String name, int size){
         
         try {
             

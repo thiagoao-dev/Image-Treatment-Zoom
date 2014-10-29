@@ -21,7 +21,7 @@ public class Main {
                 .grayImage("gray.jpg")
                 .grainImage("grain.jpg", 10000, 9900)
                 .binarizacao("bipolarizacao.jpg", 100)
-                .zoomInDigital("zoomdigital.jpg", 4)
+                .zoomInQuadrado("zoomdigital.jpg", 4)
                 .zoomInLinear("zoommediano.jpg", 4);
     }
     
