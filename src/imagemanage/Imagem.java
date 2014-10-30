@@ -287,39 +287,128 @@ public class Imagem {
                 BufferedImage.TYPE_INT_RGB);
                 Random gerador = new Random();
             
+            // Separa os pixels
             for (int x = 0; x < this.inputImage.getWidth(); x++) {
 
                 for (int y = 0; y < this.inputImage.getHeight(); y++) {
-                    
-                    // Recupera o número representativo do binário para o pixel indicado
+
                     int rgb = this.inputImage.getRGB(x, y);
-                    // Separa as cores binárias em uma escala de um inteiro de 255
+                    
                     int blue  = 0x0000ff & rgb;
                     int green = 0x0000ff & (rgb >> 8);
                     int red   = 0x0000ff & (rgb >> 16);
                     
-                    if(y%2!=0){
-                       this.outputImage.setRGB(x, y, 255 | (255 << 8) | (255 << 16)); 
-                       this.outputImage.setRGB(this.inputImage.getWidth()+x-1, y, 255 | (255 << 8) | (255 << 16));  
-                       this.outputImage.setRGB(x, this.inputImage.getHeight()+y-1, 255 | (255 << 8) | (255 << 16));  
-                       this.outputImage.setRGB(this.inputImage.getWidth()+x-1, this.inputImage.getHeight()+y-1, 255 | (255 << 8) | (255 << 16));  
-                    }
-                    else if(x%2!=0){
-                       this.outputImage.setRGB(x, y, 255 | (255 << 8) | (255 << 16)); 
-//                       this.outputImage.setRGB(x, this.inputImage.getHeight()+y-1, 255 | (255 << 8) | (255 << 16));
-                       this.outputImage.setRGB(this.inputImage.getWidth()+x-1, y, 255 | (255 << 8) | (255 << 16));    
-//                       this.outputImage.setRGB(this.inputImage.getWidth()+x-1, this.inputImage.getHeight()+y-1, 255 | (255 << 8) | (255 << 16)); 
-                    }
-//                    else if (x%2!=0 && y%2!=0){
-//                        this.outputImage.setRGB(((x*2)-1), ((y*2)-1), 255 | (255 << 8) | (255 << 16));   
-//                    }
-                        
-                    // Grava os pixels na imagem de saida
                     this.outputImage.setRGB(x*2, y*2, blue | (green << 8) | (red << 16));
 
                 }
             }
+            
+            // Calcula valor de x pares
+            int tBlue = 0, tGreen = 0, tRed = 0;
+            
+            for (int y = 0; y < this.outputImage.getHeight(); y++) {
 
+                for (int x = 0; x < this.outputImage.getWidth(); x++) {
+
+                    int rgb = this.outputImage.getRGB(x, y);
+                    
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    if(y%2==0 && x%2!=0){
+                        tBlue = ( blue + tBlue ) / 2;
+                        tGreen = ( green + tGreen ) / 2;
+                        tRed = ( red + tRed ) / 2;
+                        this.outputImage.setRGB(x, y, tBlue | (tGreen << 8) | (tRed << 16));
+                    }
+                    
+                    tBlue = blue;
+                    tGreen = green;
+                    tRed = red;
+                    
+                }
+            }
+            
+            // Calcula valor de x impares e y pares            
+            for (int x = 0; x < this.outputImage.getWidth(); x++) {
+
+                for (int y = 0; y < this.outputImage.getHeight(); y++) {
+
+                    int rgb = this.outputImage.getRGB(x, y);
+                    
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    if(y%2!=0 && x%2==0){
+                        tBlue = ( blue + tBlue ) / 2;
+                        tGreen = ( green + tGreen ) / 2;
+                        tRed = ( red + tRed ) / 2;
+                        this.outputImage.setRGB(x, y, tBlue | (tGreen << 8) | (tRed << 16));
+                    }
+                    
+                    tBlue = blue;
+                    tGreen = green;
+                    tRed = red;
+                    
+                }
+            }
+            
+            // Calcula valor de x impares e y impares de calculo vertical             
+            for (int x = 0; x < this.outputImage.getWidth(); x++) {
+
+                for (int y = 0; y < this.outputImage.getHeight(); y++) {
+
+                    int rgb = this.outputImage.getRGB(x, y);
+                    
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    if(y%2!=0 && x%2!=0){
+                        tBlue = ( blue + tBlue ) / 2;
+                        tGreen = ( green + tGreen ) / 2;
+                        tRed = ( red + tRed ) / 2;
+                        this.outputImage.setRGB(x, y, tBlue | (tGreen << 8) | (tRed << 16));
+                    }
+                    
+                    tBlue = blue;
+                    tGreen = green;
+                    tRed = red;
+                    
+                }
+            }
+            
+            
+            // Calcula valor de x e y impares de calculo horizontal     
+            for (int y = 0; y < this.outputImage.getHeight(); y++) {
+
+                for (int x = 0; x < this.outputImage.getWidth(); x++) {
+
+                    int rgb = this.outputImage.getRGB(x, y);
+                    
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    if(y%2!=0 && x%2==0){
+                        tBlue = ( blue + tBlue ) / 3;
+                        tGreen = ( green + tGreen ) / 3;
+                        tRed = ( red + tRed ) / 3;
+                        if (x > 0) {
+                            this.outputImage.setRGB(x-1, y, tBlue | (tGreen << 8) | (tRed << 16));
+                        }
+                        tBlue  = blue;
+                        tGreen = green;
+                        tRed   = red;
+                    } else {
+                        tBlue  += blue;
+                        tGreen += green;
+                        tRed   += red;
+                    }                    
+                }
+            }
             // Grava a imagem no disco
             ImageIO.write(this.outputImage, "jpg", new File(name));
         
