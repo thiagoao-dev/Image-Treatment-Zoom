@@ -18,11 +18,11 @@ public class Main {
         // TODO code application logic here
         Imagem img = new Imagem();
         img.loadImage("image.jpg")
-                .grayImage("gray.jpg")
-                .grainImage("grain.jpg", 10000, 9900)
-                .binarizacao("bipolarizacao.jpg", 100)
-                .zoomInQuadrado("zoomdigital.jpg", 4)
-                .zoomInLinear("zoommediano.jpg", 4);
+//                .grayImage("gray.jpg")
+//                .grainImage("grain.jpg", 10000, 9900)
+//                .binarizacao("bipolarizacao.jpg", 100)
+//                .zoomInQuadrado("zoomInQuadrado.jpg")
+                .zoomInLinear("zoomInLinear.jpg");
     }
     
 }
