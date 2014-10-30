@@ -17,11 +17,11 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         Imagem img = new Imagem();
-        img.loadImage("image.jpg")
-//                .grayImage("gray.jpg")
-//                .grainImage("grain.jpg", 10000, 9900)
-//                .binarizacao("bipolarizacao.jpg", 100)
-//                .zoomInQuadrado("zoomInQuadrado.jpg")
+        img.loadImage("image3.jpg")
+                .grayImage("gray.jpg")
+                .grainImage("grain.jpg", 10000, 9900)
+                .binarizacao("bipolarizacao.jpg", 100)
+                .zoomInQuadrado("zoomInQuadrado.jpg")
                 .zoomInLinear("zoomInLinear.jpg");
     }
     

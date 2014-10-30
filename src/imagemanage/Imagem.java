@@ -366,20 +366,25 @@ public class Imagem {
                     int green = 0x0000ff & (rgb >> 8);
                     int red   = 0x0000ff & (rgb >> 16);
                     
-                    if(y%2!=0 && x%2!=0){
-                        tBlue = ( blue + tBlue ) / 2;
-                        tGreen = ( green + tGreen ) / 2;
-                        tRed = ( red + tRed ) / 2;
-                        this.outputImage.setRGB(x, y, tBlue | (tGreen << 8) | (tRed << 16));
+                    if(y%2==0 && x%2!=0){
+                        tBlue = ( blue + tBlue ) / 3;
+                        tGreen = ( green + tGreen ) / 3;
+                        tRed = ( red + tRed ) / 3;
+                        if ( y > 0 ) {
+                            this.outputImage.setRGB(x, y-1, tBlue | (tGreen << 8) | (tRed << 16));
+                        }
+                        tBlue  = blue;
+                        tGreen = green;
+                        tRed   = red;
+                    } else {
+                        tBlue  += blue;
+                        tGreen += green;
+                        tRed   += red;
                     }
-                    
-                    tBlue = blue;
-                    tGreen = green;
-                    tRed = red;
+                        
                     
                 }
             }
-            
             
             // Calcula valor de x e y impares de calculo horizontal     
             for (int y = 0; y < this.outputImage.getHeight(); y++) {
@@ -406,7 +411,7 @@ public class Imagem {
                         tBlue  += blue;
                         tGreen += green;
                         tRed   += red;
-                    }                    
+                    }
                 }
             }
             // Grava a imagem no disco
