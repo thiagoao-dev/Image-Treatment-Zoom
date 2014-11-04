@@ -244,8 +244,8 @@ public class Imagem {
         try {
             
             this.outputImage = new BufferedImage( 
-                this.inputImage.getWidth() * 4, 
-                this.inputImage.getHeight() * 4, 
+                this.inputImage.getWidth() * 2, 
+                this.inputImage.getHeight() * 2, 
                 BufferedImage.TYPE_INT_RGB);
                 Random gerador = new Random();
                     
@@ -254,7 +254,7 @@ public class Imagem {
                 for (int y = 0; y < this.outputImage.getHeight(); y+=2) {
                     
                     // Recupera o número representativo do binário para o pixel indicado
-                    int rgb = this.inputImage.getRGB(x/4, y/4);
+                    int rgb = this.inputImage.getRGB(x/2, y/2);
                     // Separa as cores binárias em uma escala de um inteiro de 255
                     int blue  = 0x0000ff & rgb;
                     int green = 0x0000ff & (rgb >> 8);
@@ -316,21 +316,20 @@ public class Imagem {
                     int green = 0x0000ff & (rgb >> 8);
                     int red   = 0x0000ff & (rgb >> 16);
                     
-                    if(y%2==0 && x%2!=0){
+                    if(y%2==0 && x%2==0 && x > 0){
                         tBlue = ( blue + tBlue ) / 2;
                         tGreen = ( green + tGreen ) / 2;
                         tRed = ( red + tRed ) / 2;
-                        this.outputImage.setRGB(x, y, tBlue | (tGreen << 8) | (tRed << 16));
+                        this.outputImage.setRGB(x-1, y, tBlue | (tGreen << 8) | (tRed << 16));
+                    }else if(y%2==0 && x%2==0){
+                        tBlue = blue;
+                        tGreen = green;
+                        tRed = red;
                     }
-                    
-                    tBlue = blue;
-                    tGreen = green;
-                    tRed = red;
-                    
                 }
             }
             
-            // Calcula valor de x impares e y pares            
+//            // Calcula valor de x impares e y pares            
             for (int x = 0; x < this.outputImage.getWidth(); x++) {
 
                 for (int y = 0; y < this.outputImage.getHeight(); y++) {
@@ -341,17 +340,16 @@ public class Imagem {
                     int green = 0x0000ff & (rgb >> 8);
                     int red   = 0x0000ff & (rgb >> 16);
                     
-                    if(y%2!=0 && x%2==0){
+                    if(y%2==0 && x%2==0 && y > 0){
                         tBlue = ( blue + tBlue ) / 2;
                         tGreen = ( green + tGreen ) / 2;
                         tRed = ( red + tRed ) / 2;
-                        this.outputImage.setRGB(x, y, tBlue | (tGreen << 8) | (tRed << 16));
+                        this.outputImage.setRGB(x, y-1, tBlue | (tGreen << 8) | (tRed << 16));
+                    }else if(y%2==0 && x%2==0){
+                        tBlue = blue;
+                        tGreen = green;
+                        tRed = red;
                     }
-                    
-                    tBlue = blue;
-                    tGreen = green;
-                    tRed = red;
-                    
                 }
             }
             
@@ -376,13 +374,11 @@ public class Imagem {
                         tBlue  = blue;
                         tGreen = green;
                         tRed   = red;
-                    } else {
+                    }else if(y%2!=0 && x%2!=0){
                         tBlue  += blue;
                         tGreen += green;
                         tRed   += red;
                     }
-                        
-                    
                 }
             }
             
@@ -407,13 +403,14 @@ public class Imagem {
                         tBlue  = blue;
                         tGreen = green;
                         tRed   = red;
-                    } else {
+                    }else if(y%2!=0 && x%2!=0){
                         tBlue  += blue;
                         tGreen += green;
                         tRed   += red;
                     }
                 }
             }
+            
             // Grava a imagem no disco
             ImageIO.write(this.outputImage, "jpg", new File(name));
         
