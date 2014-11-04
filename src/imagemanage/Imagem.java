@@ -464,6 +464,10 @@ public class Imagem {
                 
                 for (int y = 0; y < this.inputImage.getHeight()-1; y+=2) {
                     
+                    
+                    int tBlue = 0;
+                    int tGreen = 0;
+                    int tRed = 0;
                     for(int y2 = 0; y2 < 2; y2++){
                         for(int x2 = 0; x2 < 2; x2++){
                             
@@ -472,11 +476,19 @@ public class Imagem {
                             int blue  = 0x0000ff & rgb;
                             int green = 0x0000ff & (rgb >> 8);
                             int red   = 0x0000ff & (rgb >> 16);
-
-                            this.outputImage.setRGB(x/2, y/2, blue | (green << 8) | (red << 16));
-                     
+                                                        
+                            if(tBlue == 0){ tBlue = blue; }
+                            else{ tBlue += blue; }
+                                                        
+                            if(tGreen == 0){ tGreen = green; }
+                            else{ tGreen += green; }
+                                                        
+                            if(tRed == 0){ tRed = red; }
+                            else{ tRed += red; }                            
+                            
                         }
                     }
+                    this.outputImage.setRGB(x/2, y/2, tBlue/4 | (tGreen/4 << 8) | (tRed/4 << 16)); 
                 }
             }
             
