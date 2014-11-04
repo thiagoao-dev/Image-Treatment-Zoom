@@ -19,7 +19,7 @@ public class App extends javax.swing.JFrame {
     public App() {
         initComponents();
         try{
-            ImageIcon icon = new ImageIcon("src/img/image2.jpg");
+            ImageIcon icon = new ImageIcon("src/img/image.jpg");
             this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
             this.label2.setIcon(icon);
         } catch (Exception e){
@@ -46,7 +46,6 @@ public class App extends javax.swing.JFrame {
         btZUL = new javax.swing.JButton();
         btReset = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        label1 = new javax.swing.JLabel();
         label2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +72,8 @@ public class App extends javax.swing.JFrame {
         });
 
         btZIL.setText("ZIL");
+        btZIL.setMaximumSize(new java.awt.Dimension(51, 23));
+        btZIL.setMinimumSize(new java.awt.Dimension(51, 23));
         btZIL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btZILActionPerformed(evt);
@@ -109,56 +110,46 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btReset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btBi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btCinza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btZIQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btZIL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btZUQ, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btZUL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btBi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btCinza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btZIQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btZIL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btZUL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btZUQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btReset, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(btCinza, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btReset)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btBi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCinza)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btZIQ, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btBi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btZIL, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btZIQ)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btZUQ, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btZIL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btZUL, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(btZUQ)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btZUL)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        label1.setText("Original");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1)
-                    .addComponent(label2))
-                .addContainerGap(361, Short.MAX_VALUE))
+            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,9 +158,9 @@ public class App extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -177,8 +168,8 @@ public class App extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -188,7 +179,7 @@ public class App extends javax.swing.JFrame {
     private void btCinzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCinzaActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem();
-        img.loadImage("image2.jpg").grayImage("cinza.jpg");
+        img.loadImage("image.jpg").grayImage("cinza.jpg");
         try{
             ImageIcon icon = new ImageIcon("cinza.jpg");
             this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
@@ -202,7 +193,7 @@ public class App extends javax.swing.JFrame {
     private void btResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResetActionPerformed
         // TODO add your handling code here:
         try{
-            ImageIcon icon = new ImageIcon("src/img/image2.jpg");
+            ImageIcon icon = new ImageIcon("src/img/image.jpg");
             this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
             this.label2.setIcon(icon);
             this.revalidate();
@@ -214,7 +205,7 @@ public class App extends javax.swing.JFrame {
     private void btBiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBiActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem();
-        img.loadImage("image2.jpg").binarizacao("bibolarizacao.jpg",100);
+        img.loadImage("image.jpg").binarizacao("bibolarizacao.jpg",100);
         try{
             ImageIcon icon = new ImageIcon("bibolarizacao.jpg");
             this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
@@ -228,7 +219,7 @@ public class App extends javax.swing.JFrame {
     private void btZIQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZIQActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem();
-        img.loadImage("image2.jpg").zoomInQuadrado("zoominq.jpg");
+        img.loadImage("image.jpg").zoomInQuadrado("zoominq.jpg");
         try{
             ImageIcon icon = new ImageIcon("zoominq.jpg");
             this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
@@ -242,7 +233,7 @@ public class App extends javax.swing.JFrame {
     private void btZILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZILActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem();
-        img.loadImage("image2.jpg").zoomInLinear("zoominl.jpg");
+        img.loadImage("image.jpg").zoomInLinear("zoominl.jpg");
         try{
             ImageIcon icon = new ImageIcon("zoominl.jpg");
             this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
@@ -256,10 +247,10 @@ public class App extends javax.swing.JFrame {
     private void btZUQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZUQActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem();
-        img.loadImage("image2.jpg").zoomOutQuadratica("zoomoutq.jpg");
+        img.loadImage("image.jpg").zoomOutQuadratica("zoomoutq.jpg");
         try{
             ImageIcon icon = new ImageIcon("zoomoutq.jpg");
-            this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
+            this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+160);
             this.label2.setIcon(icon);
             this.revalidate();
         } catch (Exception e){
@@ -270,10 +261,10 @@ public class App extends javax.swing.JFrame {
     private void btZULActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btZULActionPerformed
         // TODO add your handling code here:
         Imagem img = new Imagem();
-        img.loadImage("image2.jpg").zoomOutLinear("zoomoutl.jpg");
+        img.loadImage("image.jpg").zoomOutLinear("zoomoutl.jpg");
         try{
             ImageIcon icon = new ImageIcon("zoomoutl.jpg");
-            this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+80);
+            this.setSize(icon.getIconWidth()+170, icon.getIconHeight()+160);
             this.label2.setIcon(icon);
             this.revalidate();
         } catch (Exception e){
@@ -327,7 +318,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel label1;
     private javax.swing.JLabel label2;
     // End of variables declaration//GEN-END:variables
 }
