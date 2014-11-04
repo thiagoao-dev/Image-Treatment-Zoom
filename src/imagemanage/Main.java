@@ -17,12 +17,14 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         Imagem img = new Imagem();
-        img.loadImage("image.jpg")
+        img.loadImage("image2.jpg")
                 .grayImage("gray.jpg")
                 .grainImage("grain.jpg", 10000, 9900)
                 .binarizacao("bipolarizacao.jpg", 100)
                 .zoomInQuadrado("zoomInQuadrado.jpg")
-                .zoomInLinear("zoomInLinear.jpg");
+                .zoomInLinear("zoomInLinear.jpg")
+                .zoomOutQuadratica("zoomOutQuadratica.jpg")
+                .zoomOutLinear("zoomOutLinear.jpg");
     }
     
 }

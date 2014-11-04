@@ -47,7 +47,6 @@ public class Imagem {
                 this.inputImage.getWidth(), 
                 this.inputImage.getHeight(), 
                 BufferedImage.TYPE_INT_RGB);
-                Random gerador = new Random();
                     
             for (int x = 0; x < this.inputImage.getWidth(); x++) {
                 
@@ -130,7 +129,6 @@ public class Imagem {
                 this.inputImage.getWidth(), 
                 this.inputImage.getHeight(), 
                 BufferedImage.TYPE_INT_RGB);
-                Random gerador = new Random();
                     
             for (int x = 0; x < this.inputImage.getWidth(); x++) {
                 
@@ -170,7 +168,6 @@ public class Imagem {
                 this.inputImage.getWidth(), 
                 this.inputImage.getHeight(), 
                 BufferedImage.TYPE_INT_RGB);
-                Random gerador = new Random();
                     
             for (int x = 0; x < this.inputImage.getWidth(); x++) {
                 
@@ -247,7 +244,6 @@ public class Imagem {
                 this.inputImage.getWidth() * 2, 
                 this.inputImage.getHeight() * 2, 
                 BufferedImage.TYPE_INT_RGB);
-                Random gerador = new Random();
                     
             for (int x = 0; x < this.outputImage.getWidth(); x+=2) {
                 
@@ -285,7 +281,6 @@ public class Imagem {
                 this.inputImage.getWidth()*2-1, 
                 this.inputImage.getHeight()*2-1, 
                 BufferedImage.TYPE_INT_RGB);
-                Random gerador = new Random();
             
             // Separa os pixels
             for (int x = 0; x < this.inputImage.getWidth(); x++) {
@@ -329,7 +324,7 @@ public class Imagem {
                 }
             }
             
-//            // Calcula valor de x impares e y pares            
+            // Calcula valor de x impares e y pares            
             for (int x = 0; x < this.outputImage.getWidth(); x++) {
 
                 for (int y = 0; y < this.outputImage.getHeight(); y++) {
@@ -419,6 +414,80 @@ public class Imagem {
         }
         
         return this;        
+    }
+    
+    public Imagem zoomOutQuadratica(String name){
+        
+        try {
+            
+            this.outputImage = new BufferedImage( 
+                this.inputImage.getWidth() / 2, 
+                this.inputImage.getHeight() / 2, 
+                BufferedImage.TYPE_INT_RGB);
+            
+            Random gerador = new Random();
+                    
+            for (int x = 0; x < this.inputImage.getWidth()-1; x+=2) {
+                
+                for (int y = 0; y < this.inputImage.getHeight()-1; y+=2) {
+                    
+                    int rgb = this.inputImage.getRGB(x+gerador.nextInt(2), y+gerador.nextInt(2));
+                    
+                    int blue  = 0x0000ff & rgb;
+                    int green = 0x0000ff & (rgb >> 8);
+                    int red   = 0x0000ff & (rgb >> 16);
+                    
+                    this.outputImage.setRGB(x/2, y/2, blue | (green << 8) | (red << 16));
+                }
+            }
+            
+            // Grava a imagem no disco
+            ImageIO.write(this.outputImage, "jpg", new File(name));
+        
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return this;
+    }
+    
+    public Imagem zoomOutLinear(String name){
+        
+        try {
+            
+            this.outputImage = new BufferedImage( 
+                this.inputImage.getWidth() / 2, 
+                this.inputImage.getHeight() / 2, 
+                BufferedImage.TYPE_INT_RGB);
+            
+            for (int x = 0; x < this.inputImage.getWidth()-1; x+=2) {
+                
+                for (int y = 0; y < this.inputImage.getHeight()-1; y+=2) {
+                    
+                    for(int y2 = 0; y2 < 2; y2++){
+                        for(int x2 = 0; x2 < 2; x2++){
+                            
+                            int rgb = this.inputImage.getRGB(x+x2, y+y2);
+                            
+                            int blue  = 0x0000ff & rgb;
+                            int green = 0x0000ff & (rgb >> 8);
+                            int red   = 0x0000ff & (rgb >> 16);
+
+                            this.outputImage.setRGB(x/2, y/2, blue | (green << 8) | (red << 16));
+                     
+                        }
+                    }
+                }
+            }
+            
+            // Grava a imagem no disco
+            ImageIO.write(this.outputImage, "jpg", new File(name));
+        
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return this;
     }
     
 }
